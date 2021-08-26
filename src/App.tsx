@@ -11,9 +11,9 @@ import GlobalStyle from './style/Global'
 import SuspenseWithChunkError from './components/SuspenseWithChunkError'
 import { ToastListener } from './contexts/ToastsContext'
 import PageLoader from './components/Loader/PageLoader'
-import EasterEgg from './components/EasterEgg'
 import history from './routerHistory'
 import Swap from './views/Swap'
+import Layout from './views/Layout';
 import { RedirectToSwap } from './views/Swap/redirects'
 
 const NotFound = lazy(() => import('./views/NotFound'))
@@ -37,6 +37,7 @@ const App: React.FC = () => {
     <Router history={history}>
       <ResetCSS />
       <GlobalStyle />
+      <Layout>
         <SuspenseWithChunkError fallback={<PageLoader />}>
           <Switch>
             <Route exact strict path="/swap" component={Swap} />
@@ -51,7 +52,7 @@ const App: React.FC = () => {
             <Route component={NotFound} />
           </Switch>
         </SuspenseWithChunkError>
-      <EasterEgg iterations={2} />
+      </Layout>
       <ToastListener />
       <DatePickerPortal />
     </Router>

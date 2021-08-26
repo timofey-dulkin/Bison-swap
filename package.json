@@ -33,9 +33,11 @@
   },
   "dependencies": {
     "@binance-chain/bsc-connector": "^1.0.0",
+    "@binance-chain/bsc-use-wallet": "^0.8.1",
     "@ethersproject/experimental": "^5.0.1",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@pancakeswap-libs/uikit": "^0.29.4",
     "@pancakeswap/sdk": "^2.3.2",
     "@pancakeswap/uikit": "^0.49.1",
     "@reduxjs/toolkit": "^1.5.0",

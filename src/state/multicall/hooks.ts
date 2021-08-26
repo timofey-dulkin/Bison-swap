@@ -188,6 +188,7 @@ export function useSingleContractMultipleData(
   const { currentBlock } = useBlock()
 
   return useMemo(() => {
+    // @ts-ignore
     return results.map((result) => toCallState(result, contract?.interface, fragment, currentBlock))
   }, [fragment, contract, results, currentBlock])
 }
@@ -255,6 +256,7 @@ export function useSingleCallResult(
   const { currentBlock } = useBlock()
 
   return useMemo(() => {
+    // @ts-ignore
     return toCallState(result, contract?.interface, fragment, currentBlock)
   }, [result, contract, fragment, currentBlock])
 }

@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Kanit', sans-serif;
   }
   body {
-    background-color: ${({ theme }) => theme.colors.background};
+    background: rgba(30, 31, 32, 0.8);
 
     img {
       height: auto;
