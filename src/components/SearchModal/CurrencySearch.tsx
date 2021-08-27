@@ -3,6 +3,7 @@ import { Currency, ETHER, Token } from '@pancakeswap/sdk'
 import { Text, Input, Box } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { FixedSizeList } from 'react-window'
+import styled from 'styled-components'
 import { useAudioModeManager } from 'state/user/hooks'
 import useDebounce from 'hooks/useDebounce'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
@@ -16,6 +17,13 @@ import { filterTokens, useSortedTokensByQuery } from './filtering'
 import useTokenComparator from './sorting'
 
 import ImportRow from './ImportRow'
+
+
+const InputBison = styled(Input)`
+  background: rgba(218, 161, 14, 0.14);
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid #DAA10E;
+`
 
 interface CurrencySearchProps {
   selectedCurrency?: Currency | null
@@ -124,7 +132,7 @@ function CurrencySearch({
       <div>
         <AutoColumn gap="16px">
           <Row>
-            <Input
+            <InputBison
               id="token-search-input"
               placeholder={t('Search name or paste address')}
               scale="lg"

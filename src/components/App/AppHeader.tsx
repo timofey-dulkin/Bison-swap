@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Text, Flex, Heading, IconButton, ArrowBackIcon, NotificationDot } from '@pancakeswap/uikit'
+import { Flex, IconButton, ArrowBackIcon, NotificationDot } from '@pancakeswap/uikit'
 import { Link } from 'react-router-dom'
 import { useExpertModeManager } from 'state/user/hooks'
 import GlobalSettings from 'components/Menu/GlobalSettings'
@@ -20,7 +20,19 @@ const AppHeaderContainer = styled(Flex)`
   justify-content: space-between;
   padding: 24px;
   width: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  border-bottom: 1px solid #DAA10E;
+`
+const Heading = styled.h2`
+  font-size: 20px;
+  font-weight: 700;
+  color: #DAA10E;
+  margin-bottom: 8px;
+`
+
+const Text = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
 `
 
 const AppHeader: React.FC<Props> = ({ title, subtitle, helper, backTo, noConfig = false }) => {
@@ -35,12 +47,12 @@ const AppHeader: React.FC<Props> = ({ title, subtitle, helper, backTo, noConfig 
           </IconButton>
         )}
         <Flex flexDirection="column">
-          <Heading as="h2" mb="8px">
+          <Heading>
             {title}
           </Heading>
           <Flex alignItems="center">
             {helper && <QuestionHelper text={helper} mr="4px" />}
-            <Text color="textSubtle" fontSize="14px">
+            <Text>
               {subtitle}
             </Text>
           </Flex>

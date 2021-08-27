@@ -33,6 +33,10 @@ const FixedHeightRow = styled(RowBetween)`
   height: 24px;
 `
 
+const TextCurrent = styled(Text)`
+  color: #DAA10E;
+`
+
 interface PositionCardProps extends CardProps {
   pair: Pair
   showUnwrapped?: boolean
@@ -129,14 +133,11 @@ export function MinimalPositionCard({ pair, showUnwrapped = false }: PositionCar
         </Card>
       ) : (
         <LightCard>
-          <Text fontSize="14px" style={{ textAlign: 'center' }}>
-            <span role="img" aria-label="pancake-icon">
-              🥞
-            </span>{' '}
+          <TextCurrent style={{ textAlign: 'center' }}>
             {t(
               "By adding liquidity you'll earn 0.17% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity.",
             )}
-          </Text>
+          </TextCurrent>
         </LightCard>
       )}
     </>

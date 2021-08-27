@@ -27,6 +27,7 @@ const StyledBalanceText = styled(Text)`
   overflow: hidden;
   max-width: 5rem;
   text-overflow: ellipsis;
+  color:#DAA10E;
 `
 
 const FixedContentRow = styled.div`
@@ -54,6 +55,10 @@ const MenuItem = styled(RowBetween)<{ disabled: boolean; selected: boolean }>`
   }
   opacity: ${({ disabled, selected }) => (disabled || selected ? 0.5 : 1)};
 `
+const TextBison = styled(Text)`
+  color: #DAA10E;
+`
+
 
 function CurrencyRow({
   currency,
@@ -86,10 +91,10 @@ function CurrencyRow({
     >
       <CurrencyLogo currency={currency} size="24px" />
       <Column>
-        <Text bold>{currency.symbol}</Text>
-        <Text color="textSubtle" small ellipsis maxWidth="200px">
+        <TextBison bold>{currency.symbol}</TextBison>
+        <TextBison color="textSubtle" small ellipsis maxWidth="200px">
           {!isOnSelectedList && customAdded && 'Added by user •'} {currency.name}
-        </Text>
+        </TextBison>
       </Column>
       <RowFixed style={{ justifySelf: 'flex-end' }}>
         {balance ? <Balance balance={balance} /> : account ? <CircleLoader /> : null}

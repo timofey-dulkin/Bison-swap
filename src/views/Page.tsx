@@ -10,6 +10,7 @@ const StyledPage = styled.div`
   background-color: #191919;
   min-height: calc(100vh - 250px) !important;
   padding-top: 38px;
+  padding-bottom: 38px;
 `
 
 const Page: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {

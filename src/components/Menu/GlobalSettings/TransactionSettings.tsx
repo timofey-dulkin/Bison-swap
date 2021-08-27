@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 import { Text, Button, Input, Flex, Box } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { useUserSlippageTolerance, useUserTransactionTTL } from 'state/user/hooks'
 import QuestionHelper from '../../QuestionHelper'
+
 
 enum SlippageError {
   InvalidInput = 'InvalidInput',
@@ -13,6 +15,9 @@ enum SlippageError {
 enum DeadlineError {
   InvalidInput = 'InvalidInput',
 }
+const TextBison = styled(Text)`
+  color: #DAA10E;
+`
 
 const SlippageTabs = () => {
   const [userSlippageTolerance, setUserSlippageTolerance] = useUserSlippageTolerance()
@@ -74,7 +79,7 @@ const SlippageTabs = () => {
     <Flex flexDirection="column">
       <Flex flexDirection="column" mb="24px">
         <Flex mb="12px">
-          <Text>{t('Slippage Tolerance')}</Text>
+          <TextBison>{t('Slippage Tolerance')}</TextBison>
           <QuestionHelper
             text={t(
               'Setting a high slippage tolerance can help transactions succeed, but you may not get such a good price. Use with caution.',
@@ -92,7 +97,10 @@ const SlippageTabs = () => {
               setSlippageInput('')
               setUserSlippageTolerance(10)
             }}
-            variant={userSlippageTolerance === 10 ? 'primary' : 'tertiary'}
+            style={{
+              background: (userSlippageTolerance === 10) ? '#DAA10E' : 'rgba(218, 161, 14, 0.25)',
+              color: (userSlippageTolerance === 10) ? '#000000' : '#FFFFFF'
+            }}
           >
             0.1%
           </Button>
@@ -104,7 +112,10 @@ const SlippageTabs = () => {
               setSlippageInput('')
               setUserSlippageTolerance(50)
             }}
-            variant={userSlippageTolerance === 50 ? 'primary' : 'tertiary'}
+            style={{
+              background: (userSlippageTolerance === 50) ? '#DAA10E' : 'rgba(218, 161, 14, 0.25)',
+              color: (userSlippageTolerance === 50) ? '#000000' : '#FFFFFF'
+            }}
           >
             0.5%
           </Button>
@@ -116,7 +127,10 @@ const SlippageTabs = () => {
               setSlippageInput('')
               setUserSlippageTolerance(100)
             }}
-            variant={userSlippageTolerance === 100 ? 'primary' : 'tertiary'}
+            style={{
+              background: (userSlippageTolerance === 100) ? '#DAA10E' : 'rgba(218, 161, 14, 0.25)',
+              color: (userSlippageTolerance === 100) ? '#000000' : '#FFFFFF'
+            }}
           >
             1.0%
           </Button>
@@ -126,32 +140,38 @@ const SlippageTabs = () => {
                 scale="sm"
                 placeholder={(userSlippageTolerance / 100).toFixed(2)}
                 value={slippageInput}
+                type='text'
                 onBlur={() => {
                   parseCustomSlippage((userSlippageTolerance / 100).toFixed(2))
+                }}
+                style={{
+                  background: 'rgba(218, 161, 14, 0.4)',
+                  color: '#FFFFFF',
+                  border: '1px solid #DAA10E',
                 }}
                 onChange={(e) => parseCustomSlippage(e.target.value)}
                 isWarning={!slippageInputIsValid}
                 isSuccess={![10, 50, 100].includes(userSlippageTolerance)}
               />
             </Box>
-            <Text color="primary" bold ml="2px">
+            <TextBison color="primary" bold ml="2px">
               %
-            </Text>
+            </TextBison>
           </Flex>
         </Flex>
         {!!slippageError && (
-          <Text fontSize="14px" color={slippageError === SlippageError.InvalidInput ? 'red' : '#F3841E'} mt="8px">
+          <TextBison fontSize="14px" color={slippageError === SlippageError.InvalidInput ? 'red' : '#F3841E'} mt="8px">
             {slippageError === SlippageError.InvalidInput
               ? t('Enter a valid slippage percentage')
               : slippageError === SlippageError.RiskyLow
               ? t('Your transaction may fail')
               : t('Your transaction may be frontrun')}
-          </Text>
+          </TextBison>
         )}
       </Flex>
       <Flex justifyContent="space-between" alignItems="center" mb="24px">
         <Flex alignItems="center">
-          <Text>{t('Tx deadline (mins)')}</Text>
+          <TextBison>{t('Tx deadline (mins)')}</TextBison>
           <QuestionHelper
             text={t('Your transaction will revert if it is left confirming for longer than this time.')}
             placement="top-start"
@@ -162,9 +182,15 @@ const SlippageTabs = () => {
           <Box width="52px" mt="4px">
             <Input
               scale="sm"
+              type='text'
               color={deadlineError ? 'red' : undefined}
               onBlur={() => {
                 parseCustomDeadline((ttl / 60).toString())
+              }}
+              style={{
+                background: 'rgba(218, 161, 14, 0.4)',
+                color: '#FFFFFF',
+                border: '1px solid #DAA10E',
               }}
               placeholder={(ttl / 60).toString()}
               value={deadlineInput}

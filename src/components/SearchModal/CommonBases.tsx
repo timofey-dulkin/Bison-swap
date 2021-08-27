@@ -11,7 +11,7 @@ import { AutoRow } from '../Layout/Row'
 import { CurrencyLogo } from '../Logo'
 
 const BaseWrapper = styled.div<{ disable?: boolean }>`
-  border: 1px solid ${({ theme, disable }) => (disable ? 'transparent' : theme.colors.dropdown)};
+  border: 1px solid #DAA10E;
   border-radius: 10px;
   display: flex;
   padding: 6px;
@@ -26,6 +26,11 @@ const BaseWrapper = styled.div<{ disable?: boolean }>`
   opacity: ${({ disable }) => disable && '0.4'};
 `
 
+const TextBison = styled(Text)`
+  color: #DAA10E;
+`
+
+
 export default function CommonBases({
   chainId,
   onSelect,
@@ -39,7 +44,7 @@ export default function CommonBases({
   return (
     <AutoColumn gap="md">
       <AutoRow>
-        <Text fontSize="14px">{t('Common bases')}</Text>
+        <TextBison fontSize="14px">{t('Common bases')}</TextBison>
         <QuestionHelper text={t('These tokens are commonly paired with other tokens.')} ml="4px" />
       </AutoRow>
       <AutoRow gap="auto">
@@ -52,14 +57,14 @@ export default function CommonBases({
           disable={selectedCurrency === ETHER}
         >
           <CurrencyLogo currency={ETHER} style={{ marginRight: 8 }} />
-          <Text>BNB</Text>
+          <TextBison>BNB</TextBison>
         </BaseWrapper>
         {(chainId ? SUGGESTED_BASES[chainId] : []).map((token: Token) => {
           const selected = selectedCurrency instanceof Token && selectedCurrency.address === token.address
           return (
             <BaseWrapper onClick={() => !selected && onSelect(token)} disable={selected} key={token.address}>
               <CurrencyLogo currency={token} style={{ marginRight: 8 }} />
-              <Text>{token.symbol}</Text>
+              <TextBison>{token.symbol}</TextBison>
             </BaseWrapper>
           )
         })}

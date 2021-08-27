@@ -7,6 +7,11 @@ import { useTranslation } from 'contexts/Localization'
 const StyledNav = styled.nav`
   margin-bottom: 40px;
 `
+const ButtonMenuBison = styled(ButtonMenu)`
+  background: rgba(218, 161, 14, 0.25);
+  border: none;
+`
+
 
 const getActiveIndex = (pathname: string): number => {
   if (
@@ -25,16 +30,32 @@ const getActiveIndex = (pathname: string): number => {
 const Nav = () => {
   const location = useLocation()
   const { t } = useTranslation()
+
   return (
     <StyledNav>
-      <ButtonMenu activeIndex={getActiveIndex(location.pathname)} scale="sm" variant="subtle">
-        <ButtonMenuItem id="swap-nav-link" to="/swap" as={Link}>
+      <ButtonMenuBison activeIndex={getActiveIndex(location.pathname)} scale="sm" variant="subtle">
+        <ButtonMenuItem
+          id="swap-nav-link"
+          to="/swap"
+          as={Link}
+          style={{
+            background: getActiveIndex(location.pathname) ? 'transparent' : '#DAA10E',
+            color: getActiveIndex(location.pathname) ? '#FFFFFF' : '#191919',
+          }}>
           {t('Swap')}
         </ButtonMenuItem>
-        <ButtonMenuItem id="pool-nav-link" to="/pool" as={Link}>
+        <ButtonMenuItem
+          id="pool-nav-link"
+          to="/pool"
+          as={Link}
+          style={{
+            background: getActiveIndex(location.pathname) ? '#DAA10E' :'transparent',
+            color: !getActiveIndex(location.pathname) ? '#FFFFFF' : '#191919',
+          }}
+        >
           {t('Liquidity')}
         </ButtonMenuItem>
-      </ButtonMenu>
+      </ButtonMenuBison>
     </StyledNav>
   )
 }

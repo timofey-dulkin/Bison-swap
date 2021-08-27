@@ -1,13 +1,14 @@
 import React from 'react'
-import { HistoryIcon, Button, useModal } from '@pancakeswap/uikit'
+import { Button, useModal } from '@pancakeswap/uikit'
 import TransactionsModal from './TransactionsModal'
+import { HistoryIcon } from '../../../constants/icon.constants'
 
 const Transactions = () => {
   const [onPresentTransactionsModal] = useModal(<TransactionsModal />)
   return (
     <>
       <Button variant="text" p={0} onClick={onPresentTransactionsModal} ml="16px">
-        <HistoryIcon color="textSubtle" width="24px" />
+        {HistoryIcon}
       </Button>
     </>
   )

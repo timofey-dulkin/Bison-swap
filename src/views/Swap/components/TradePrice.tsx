@@ -1,6 +1,7 @@
 import React from 'react'
 import { Price } from '@pancakeswap/sdk'
 import { Text, AutoRenewIcon } from '@pancakeswap/uikit'
+import styled from 'styled-components'
 import { StyledBalanceMaxMini } from './styleds'
 
 interface TradePriceProps {
@@ -8,6 +9,10 @@ interface TradePriceProps {
   showInverted: boolean
   setShowInverted: (showInverted: boolean) => void
 }
+const TextBison = styled(Text)`
+  color: #DAA10E;
+`
+
 
 export default function TradePrice({ price, showInverted, setShowInverted }: TradePriceProps) {
   const formattedPrice = showInverted ? price?.toSignificant(6) : price?.invert()?.toSignificant(6)
@@ -18,7 +23,7 @@ export default function TradePrice({ price, showInverted, setShowInverted }: Tra
     : `${price?.baseCurrency?.symbol} per ${price?.quoteCurrency?.symbol}`
 
   return (
-    <Text style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
+    <TextBison style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
       {show ? (
         <>
           {formattedPrice ?? '-'} {label}
@@ -29,6 +34,6 @@ export default function TradePrice({ price, showInverted, setShowInverted }: Tra
       ) : (
         '-'
       )}
-    </Text>
+    </TextBison>
   )
 }

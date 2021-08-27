@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { CurrencyAmount, JSBI, Token, Trade } from '@pancakeswap/sdk'
-import { Button, Text, ArrowDownIcon, Box, useModal } from '@pancakeswap/uikit'
+import { Button, Text, Box, useModal } from '@pancakeswap/uikit'
 import { useIsTransactionUnsupported } from 'hooks/Trades'
 import UnsupportedCurrencyFooter from 'components/UnsupportedCurrencyFooter'
 import { RouteComponentProps } from 'react-router-dom'
@@ -42,11 +42,16 @@ import { computeTradePriceBreakdown, warningSeverity } from '../../utils/prices'
 import CircleLoader from '../../components/Loader/CircleLoader'
 import Page from '../Page'
 import SwapWarningModal from './components/SwapWarningModal'
+import { ArrowDownIcon } from '../../constants/icon.constants'
 
 const Label = styled(Text)`
   font-size: 12px;
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.secondary};
+  color: #DAA10E;
+`
+
+const TextBison = styled(Text)`
+  color: #DAA10E;
 `
 
 export default function Swap({ history }: RouteComponentProps) {
@@ -305,6 +310,7 @@ export default function Swap({ history }: RouteComponentProps) {
   return (
     <Page>
       <AppBody>
+        <AppHeader title={t('Exchange')} subtitle={t('Trade tokens in an instant')} />
         <Wrapper id="swap-page">
           <AutoColumn gap="md">
             <CurrencyInputPanel
@@ -321,14 +327,16 @@ export default function Swap({ history }: RouteComponentProps) {
             <AutoColumn justify="space-between">
               <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
                 <ArrowWrapper clickable>
-                  <ArrowDownIcon
-                    width="16px"
+                  <button
                     onClick={() => {
                       setApprovalSubmitted(false) // reset 2 step UI for approvals
                       onSwitchTokens()
                     }}
-                    color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? 'primary' : 'text'}
-                  />
+                    style={{background: 'transparent', border: 'none', cursor: 'pointer'}}
+                    type='button'
+                  >
+                    {ArrowDownIcon}
+                  </button>
                 </ArrowWrapper>
                 {recipient === null && !showWrap && isExpertMode ? (
                   <Button variant="text" id="add-recipient-button" onClick={() => onChangeRecipient('')}>
@@ -352,7 +360,7 @@ export default function Swap({ history }: RouteComponentProps) {
               <>
                 <AutoRow justify="space-between" style={{ padding: '0 1rem' }}>
                   <ArrowWrapper clickable={false}>
-                    <ArrowDownIcon width="16px" />
+                    {ArrowDownIcon}
                   </ArrowWrapper>
                   <Button variant="text" id="remove-recipient-button" onClick={() => onChangeRecipient(null)}>
                     {t('- Remove send')}
@@ -377,9 +385,9 @@ export default function Swap({ history }: RouteComponentProps) {
                 {allowedSlippage !== INITIAL_ALLOWED_SLIPPAGE && (
                   <RowBetween align="center">
                     <Label>{t('Slippage Tolerance')}</Label>
-                    <Text bold color="primary">
+                    <TextBison bold color="primary">
                       {allowedSlippage / 100}%
-                    </Text>
+                    </TextBison>
                   </RowBetween>
                 )}
               </AutoColumn>
@@ -399,13 +407,13 @@ export default function Swap({ history }: RouteComponentProps) {
               </Button>
             ) : noRoute && userHasSpecifiedInputOutput ? (
               <GreyCard style={{ textAlign: 'center' }}>
-                <Text color="textSubtle" mb="4px">
+                <TextBison color="textSubtle" mb="4px">
                   {t('Insufficient liquidity for this trade.')}
-                </Text>
+                </TextBison>
                 {singleHopOnly && (
-                  <Text color="textSubtle" mb="4px">
+                  <TextBison color="textSubtle" mb="4px">
                     {t('Try enabling multi-hop trades.')}
-                  </Text>
+                  </TextBison>
                 )}
               </GreyCard>
             ) : showApproveFlow ? (
@@ -415,6 +423,10 @@ export default function Swap({ history }: RouteComponentProps) {
                   onClick={approveCallback}
                   disabled={approval !== ApprovalState.NOT_APPROVED || approvalSubmitted}
                   width="48%"
+                  style={{
+                    background: (approval !== ApprovalState.NOT_APPROVED || approvalSubmitted) ? 'rgba(255, 202, 40, 0.4)' : '#FFCA28',
+                    color: '#1E1F20'
+                  }}
                 >
                   {approval === ApprovalState.PENDING ? (
                     <AutoRow gap="6px" justify="center">
@@ -446,6 +458,10 @@ export default function Swap({ history }: RouteComponentProps) {
                   disabled={
                     !isValid || approval !== ApprovalState.APPROVED || (priceImpactSeverity > 3 && !isExpertMode)
                   }
+                  style={{
+                    background: (!isValid || approval !== ApprovalState.APPROVED || (priceImpactSeverity > 3 && !isExpertMode)) ? 'rgba(255, 202, 40, 0.4)' : '#FFCA28',
+                    color: '#1E1F20'
+                  }}
                 >
                   {priceImpactSeverity > 3 && !isExpertMode
                     ? t('Price Impact High')
@@ -473,6 +489,10 @@ export default function Swap({ history }: RouteComponentProps) {
                 id="swap-button"
                 width="100%"
                 disabled={!isValid || (priceImpactSeverity > 3 && !isExpertMode) || !!swapCallbackError}
+                style={{
+                  background: (!isValid || (priceImpactSeverity > 3 && !isExpertMode) || !!swapCallbackError) ? 'rgba(255, 202, 40, 0.4)' : '#FFCA28',
+                  color: '#1E1F20'
+                }}
               >
                 {swapInputError ||
                   (priceImpactSeverity > 3 && !isExpertMode

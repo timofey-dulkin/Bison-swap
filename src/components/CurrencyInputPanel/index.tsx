@@ -1,6 +1,6 @@
 import React from 'react'
 import { Currency, Pair } from '@pancakeswap/sdk'
-import { Button, ChevronDownIcon, Text, useModal, Flex } from '@pancakeswap/uikit'
+import { Button, useModal, Flex } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
@@ -10,6 +10,7 @@ import { CurrencyLogo, DoubleCurrencyLogo } from '../Logo'
 
 import { RowBetween } from '../Layout/Row'
 import { Input as NumericalInput } from './NumericalInput'
+import { ChevronDownIcon } from '../../constants/icon.constants'
 
 const InputRow = styled.div<{ selected: boolean }>`
   display: flex;
@@ -19,6 +20,7 @@ const InputRow = styled.div<{ selected: boolean }>`
 `
 const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm' })`
   padding: 0 0.5rem;
+  color: #DAA10E;
 `
 const LabelRow = styled.div`
   display: flex;
@@ -34,12 +36,18 @@ const InputPanel = styled.div<{ hideInput?: boolean }>`
   flex-flow: column nowrap;
   position: relative;
   border-radius: ${({ hideInput }) => (hideInput ? '8px' : '20px')};
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: rgba(218, 161, 14, 0.25);
   z-index: 1;
 `
+const Text = styled.div`
+  font-size: 14px;
+  color: #DAA10E;
+  font-weight: 500;
+`
+
 const Container = styled.div<{ hideInput: boolean }>`
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.input};
+  background-color:  rgba(218, 161, 14, 0.25);
   box-shadow: ${({ theme }) => theme.shadows.inset};
 `
 interface CurrencyInputPanelProps {
@@ -93,9 +101,9 @@ export default function CurrencyInputPanel({
         {!hideInput && (
           <LabelRow>
             <RowBetween>
-              <Text fontSize="14px">{translatedLabel}</Text>
+              <Text>{translatedLabel}</Text>
               {account && (
-                <Text onClick={onMax} fontSize="14px" style={{ display: 'inline', cursor: 'pointer' }}>
+                <Text onClick={onMax} style={{ display: 'inline', cursor: 'pointer' }}>
                   {!hideBalance && !!currency && selectedCurrencyBalance
                     ? t('Balance: %amount%', { amount: selectedCurrencyBalance?.toSignificant(6) ?? '' })
                     : ' -'}
@@ -115,7 +123,7 @@ export default function CurrencyInputPanel({
                 }}
               />
               {account && currency && showMaxButton && label !== 'To' && (
-                <Button onClick={onMax} scale="sm" variant="text">
+                <Button onClick={onMax} scale="sm" variant="text" style={{color: '#FFFFFF'}}>
                   MAX
                 </Button>
               )}
@@ -150,7 +158,7 @@ export default function CurrencyInputPanel({
                     : currency?.symbol) || t('Select a currency')}
                 </Text>
               )}
-              {!disableCurrencySelect && <ChevronDownIcon />}
+              {!disableCurrencySelect && ChevronDownIcon}
             </Flex>
           </CurrencySelectButton>
         </InputRow>

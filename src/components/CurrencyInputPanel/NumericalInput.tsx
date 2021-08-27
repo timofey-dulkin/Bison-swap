@@ -68,6 +68,7 @@ export const Input = React.memo(function InnerInput({
         // replace commas with periods, because we exclusively uses period as the decimal separator
         enforcer(event.target.value.replace(/,/g, '.'))
       }}
+      style={{color: '#FFF'}}
       // universal input options
       inputMode="decimal"
       title={t('Token Amount')}

@@ -9,7 +9,6 @@ import {
   ModalBody,
   InjectedModalProps,
   Heading,
-  Button,
 } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import usePrevious from 'hooks/usePreviousValue'
@@ -21,21 +20,32 @@ import Manage from './Manage'
 import ImportList from './ImportList'
 import { CurrencyModalView } from './types'
 
-const Footer = styled.div`
-  width: 100%;
-  background-color: ${({ theme }) => theme.colors.backgroundAlt};
-  text-align: center;
-`
 
 const StyledModalContainer = styled(ModalContainer)`
   max-width: 420px;
   width: 100%;
+  box-shadow: none;
+  border: 1px solid #DAA10E;
+  background: #1E1F20;
 `
 
 const StyledModalBody = styled(ModalBody)`
   padding: 24px;
 `
 
+const HeadingTitle = styled(Heading)`
+  color: #DAA10E;
+`
+
+const ModalHeaderCurrent = styled(ModalHeader)`
+  background: #1E1F20 !important;
+  border-bottom: 1px solid #DAA10E;
+`
+const ModalCloseButtonBison = styled(ModalCloseButton)`
+  svg {
+    fill: #DAA10E;
+  }
+`
 interface CurrencySearchModalProps extends InjectedModalProps {
   selectedCurrency?: Currency | null
   onCurrencySelect: (currency: Currency) => void
@@ -85,13 +95,13 @@ export default function CurrencySearchModal({
 
   return (
     <StyledModalContainer minWidth="320px">
-      <ModalHeader>
+      <ModalHeaderCurrent>
         <ModalTitle>
           {config[modalView].onBack && <ModalBackButton onBack={config[modalView].onBack} />}
-          <Heading>{config[modalView].title}</Heading>
+          <HeadingTitle>{config[modalView].title}</HeadingTitle>
         </ModalTitle>
-        <ModalCloseButton onDismiss={onDismiss} />
-      </ModalHeader>
+        <ModalCloseButtonBison onDismiss={onDismiss} />
+      </ModalHeaderCurrent>
       <StyledModalBody>
         {modalView === CurrencyModalView.search ? (
           <CurrencySearch
@@ -115,18 +125,6 @@ export default function CurrencySearchModal({
           />
         ) : (
           ''
-        )}
-        {modalView === CurrencyModalView.search && (
-          <Footer>
-            <Button
-              scale="sm"
-              variant="text"
-              onClick={() => setModalView(CurrencyModalView.manage)}
-              className="list-token-manage-button"
-            >
-              {t('Manage Tokens')}
-            </Button>
-          </Footer>
         )}
       </StyledModalBody>
     </StyledModalContainer>

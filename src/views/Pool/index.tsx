@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { Pair } from '@pancakeswap/sdk'
-import { Text, Flex, CardBody, CardFooter, Button, AddIcon } from '@pancakeswap/uikit'
+import { Flex, CardBody, Button, AddIcon } from '@pancakeswap/uikit'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'contexts/Localization'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
@@ -14,7 +14,16 @@ import { AppHeader, AppBody } from '../../components/App'
 import Page from '../Page'
 
 const Body = styled(CardBody)`
-  background-color: ${({ theme }) => theme.colors.dropdownDeep};
+  background-color: #1E1F20;
+`
+const CardFooter = styled(CardBody)`
+  border-radius: 0 0 35px 35px;
+`
+const Text = styled.div`
+ font-weight: 700;
+  font-size: 16px;
+  color: #DAA10E;
+  text-align: center;
 `
 
 export default function Pool() {
@@ -54,14 +63,14 @@ export default function Pool() {
   const renderBody = () => {
     if (!account) {
       return (
-        <Text color="textSubtle" textAlign="center">
+        <Text>
           {t('Connect to a wallet to view your liquidity.')}
         </Text>
       )
     }
     if (v2IsLoading) {
       return (
-        <Text color="textSubtle" textAlign="center">
+        <Text>
           <Dots>{t('Loading')}</Dots>
         </Text>
       )
@@ -76,7 +85,7 @@ export default function Pool() {
       ))
     }
     return (
-      <Text color="textSubtle" textAlign="center">
+      <Text>
         {t('No liquidity found.')}
       </Text>
     )
@@ -90,7 +99,7 @@ export default function Pool() {
           {renderBody()}
           {account && !v2IsLoading && (
             <Flex flexDirection="column" alignItems="center" mt="24px">
-              <Text color="textSubtle" mb="8px">
+              <Text style={{marginBottom: '14px'}}>
                 {t("Don't see a pool you joined?")}
               </Text>
               <Button id="import-pool-link" variant="secondary" scale="sm" as={Link} to="/find">

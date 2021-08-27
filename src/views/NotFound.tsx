@@ -1,16 +1,33 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Button, Heading, Text, LogoIcon } from '@pancakeswap/uikit'
+import { Button, Heading, Text } from '@pancakeswap/uikit'
 import Page from 'components/Layout/Page'
 import { useTranslation } from 'contexts/Localization'
+import { Image } from '@pancakeswap-libs/uikit'
 
 const StyledNotFound = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 64px);
   justify-content: center;
 `
+
+const HeadingBison = styled(Heading)`
+  color: #DAA10E;
+`
+
+const TextBison = styled(Text)`
+  color: #DAA10E;
+`
+
+const ButtonBison = styled(Button)`
+  color: #191919;
+  background: #DAA10E;
+  border-radius: 15px;
+  padding: 7px 17px;
+`
+
+
 
 const NotFound = () => {
   const { t } = useTranslation()
@@ -18,12 +35,12 @@ const NotFound = () => {
   return (
     <Page>
       <StyledNotFound>
-        <LogoIcon width="64px" mb="8px" />
-        <Heading scale="xxl">404</Heading>
-        <Text mb="16px">{t('Oops, page not found.')}</Text>
-        <Button as="a" href="/" scale="sm">
+        <Image src="BiSharesLogo.png" width={114} height={48} alt='logo'/>
+        <HeadingBison scale="xxl">404</HeadingBison>
+        <TextBison mb="16px">{t('Oops, page not found.')}</TextBison>
+        <ButtonBison as="a" href="/" scale="sm">
           {t('Back Home')}
-        </Button>
+        </ButtonBison>
       </StyledNotFound>
     </Page>
   )

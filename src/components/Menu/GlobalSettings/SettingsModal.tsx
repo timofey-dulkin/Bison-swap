@@ -17,6 +17,14 @@ const PancakeToggleWrapper = styled.div`
     position: absolute;
   }
 `
+const ModalBison = styled(Modal)`
+  background: #1E1F20;
+  border: 1px solid #DAA10E;
+`
+const TextBison = styled(Text)`
+  color: #DAA10E;
+`
+
 
 const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
   const [showConfirmExpertModal, setShowConfirmExpertModal] = useState(false)
@@ -54,7 +62,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
   }
 
   return (
-    <Modal
+    <ModalBison
       title={t('Settings')}
       headerBackground="gradients.cardHeader"
       onDismiss={onDismiss}
@@ -62,20 +70,20 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
     >
       <Flex flexDirection="column">
         <Flex pb="24px" flexDirection="column">
-          <Text bold textTransform="uppercase" fontSize="12px" color="secondary" mb="24px">
+          <TextBison bold textTransform="uppercase" fontSize="12px" color="secondary" mb="24px">
             {t('Global')}
-          </Text>
+          </TextBison>
           <GasSettings />
         </Flex>
         <Flex pt="24px" flexDirection="column" borderTop={`1px ${theme.colors.cardBorder} solid`}>
-          <Text bold textTransform="uppercase" fontSize="12px" color="secondary" mb="24px">
+          <TextBison bold textTransform="uppercase" fontSize="12px" color="secondary" mb="24px">
             {t('Swaps & Liquidity')}
-          </Text>
+          </TextBison>
           <TransactionSettings />
         </Flex>
         <Flex justifyContent="space-between" alignItems="center" mb="24px">
           <Flex alignItems="center">
-            <Text>{t('Expert Mode')}</Text>
+            <TextBison>{t('Expert Mode')}</TextBison>
             <QuestionHelper
               text={t('Bypasses confirmation modals and allows high slippage trades. Use at your own risk.')}
               placement="top-start"
@@ -86,7 +94,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
         </Flex>
         <Flex justifyContent="space-between" alignItems="center" mb="24px">
           <Flex alignItems="center">
-            <Text>{t('Disable Multihops')}</Text>
+            <TextBison>{t('Disable Multihops')}</TextBison>
             <QuestionHelper text={t('Restricts swaps to direct pairs only.')} placement="top-start" ml="4px" />
           </Flex>
           <Toggle
@@ -100,7 +108,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
         </Flex>
         <Flex justifyContent="space-between" alignItems="center">
           <Flex alignItems="center">
-            <Text>{t('Flippy sounds')}</Text>
+            <TextBison>{t('Flippy sounds')}</TextBison>
             <QuestionHelper
               text={t('Fun sounds to make a truly immersive pancake-flipping trading experience')}
               placement="top-start"
@@ -108,11 +116,15 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
             />
           </Flex>
           <PancakeToggleWrapper>
-            <PancakeToggle checked={audioPlay} onChange={toggleSetAudioMode} scale="md" />
+            <Toggle
+              checked={audioPlay}
+              onChange={toggleSetAudioMode}
+              scale="md"
+            />
           </PancakeToggleWrapper>
         </Flex>
       </Flex>
-    </Modal>
+    </ModalBison>
   )
 }
 
