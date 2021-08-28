@@ -7,6 +7,7 @@ import { isTransactionRecent, useAllTransactions } from 'state/transactions/hook
 import { TransactionDetails } from 'state/transactions/reducer'
 import { AppDispatch } from 'state'
 import { clearAllTransactions } from 'state/transactions/actions'
+import styled from 'styled-components'
 import { AutoRow } from '../../Layout/Row'
 import Transaction from './Transaction'
 
@@ -14,6 +15,10 @@ import Transaction from './Transaction'
 function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
   return b.addedTime - a.addedTime
 }
+
+const TextBison = styled(Text)`
+  color: #DAA10E;
+`
 
 function renderTransactions(transactions: TransactionDetails[]) {
   return (
@@ -51,8 +56,16 @@ const TransactionsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
           {!!pending.length || !!confirmed.length ? (
             <>
               <AutoRow mb="1rem" style={{ justifyContent: 'space-between' }}>
-                <Text>{t('Recent Transactions')}</Text>
-                <Button variant="tertiary" scale="xs" onClick={clearAllTransactionsCallback}>
+                <TextBison>{t('Recent Transactions')}</TextBison>
+                <Button
+                  variant="tertiary"
+                  scale="xs"
+                  onClick={clearAllTransactionsCallback}
+                  style={{
+                    background:'#FFCA28',
+                    color: '#1E1F20'
+                  }}
+                >
                   {t('clear all')}
                 </Button>
               </AutoRow>
@@ -60,7 +73,7 @@ const TransactionsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
               {renderTransactions(confirmed)}
             </>
           ) : (
-            <Text>{t('No recent transactions')}</Text>
+            <TextBison>{t('No recent transactions')}</TextBison>
           )}
         </ModalBody>
       )}

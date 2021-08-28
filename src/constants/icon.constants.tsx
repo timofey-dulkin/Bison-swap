@@ -300,5 +300,40 @@ export const ChevronDownIcon = (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M5 7.5L10 12.5L15 7.5" stroke="#DAA10E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
+)
+export const InfoIcon = (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 14.6667C11.6819 14.6667 14.6667 11.6819 14.6667 8C14.6667 4.3181 11.6819 1.33333 8 1.33333C4.3181 1.33333 1.33333 4.3181 1.33333 8C1.33333 11.6819 4.3181 14.6667 8 14.6667Z" stroke="#DAA10E" strokeOpacity="0.25" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M8 10.6667V8" stroke="#DAA10E" strokeOpacity="0.25" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M8 5.33333H8.00667" stroke="#DAA10E" strokeOpacity="0.25" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
 
+export const InfoIcon64x64 = (
+  <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M32.0007 58.6667C46.7282 58.6667 58.6673 46.7276 58.6673 32C58.6673 17.2724 46.7282 5.33333 32.0007 5.33333C17.2731 5.33333 5.33398 17.2724 5.33398 32C5.33398 46.7276 17.2731 58.6667 32.0007 58.6667Z" stroke="#DAA10E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M32 42.6667V32" stroke="#DAA10E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M32 21.3333H32.0267" stroke="#DAA10E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
+
+export const ArrowDownIcon16x16 = (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 3.33333V12.6667" stroke="#DAA10E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M12.6673 8L8.00065 12.6667L3.33398 8" stroke="#DAA10E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
+
+export const ArrowBackIcon = (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M25.3327 16H6.66602" stroke="#DAA10E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M15.9993 25.3333L6.66602 16L15.9993 6.66666" stroke="#DAA10E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
+
+export const AddIcon = (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 4.16666V15.8333" stroke="#DAA10E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M4.16602 10H15.8327" stroke="#DAA10E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
 )

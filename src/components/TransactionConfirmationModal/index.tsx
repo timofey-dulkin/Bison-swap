@@ -22,6 +22,8 @@ import { RowFixed } from '../Layout/Row'
 import { AutoColumn, ColumnCenter } from '../Layout/Column'
 import { getBscScanLink } from '../../utils'
 
+import { InfoIcon64x64 } from '../../constants/icon.constants'
+
 const Wrapper = styled.div`
   width: 100%;
 `
@@ -33,23 +35,24 @@ const ConfirmedIcon = styled(ColumnCenter)`
   padding: 24px 0;
 `
 
+const TextBison = styled(Text)`
+  color: #DAA10E;
+`
+
 function ConfirmationPendingContent({ pendingText }: { pendingText: string }) {
   const { t } = useTranslation()
   return (
     <Wrapper>
-      <ConfirmedIcon>
-        <Spinner />
-      </ConfirmedIcon>
       <AutoColumn gap="12px" justify="center">
-        <Text fontSize="20px">{t('Waiting For Confirmation')}</Text>
+        <TextBison fontSize="20px">{t('Waiting For Confirmation')}</TextBison>
         <AutoColumn gap="12px" justify="center">
-          <Text bold small textAlign="center">
+          <TextBison bold small textAlign="center">
             {pendingText}
-          </Text>
+          </TextBison>
         </AutoColumn>
-        <Text small color="textSubtle" textAlign="center">
+        <TextBison small color="textSubtle" textAlign="center">
           {t('Confirm this transaction in your wallet')}
-        </Text>
+        </TextBison>
       </AutoColumn>
     </Wrapper>
   )
@@ -79,7 +82,7 @@ function TransactionSubmittedContent({
           <ArrowUpIcon strokeWidth={0.5} width="90px" color="primary" />
         </ConfirmedIcon>
         <AutoColumn gap="12px" justify="center">
-          <Text fontSize="20px">{t('Transaction Submitted')}</Text>
+          <TextBison fontSize="20px">{t('Transaction Submitted')}</TextBison>
           {chainId && hash && (
             <Link external small href={getBscScanLink(hash, 'transaction', chainId)}>
               {t('View on BscScan')}
@@ -127,14 +130,22 @@ export function TransactionErrorContent({ message, onDismiss }: { message: strin
   return (
     <Wrapper>
       <AutoColumn justify="center">
-        <ErrorIcon color="failure" width="64px" />
-        <Text color="failure" style={{ textAlign: 'center', width: '85%' }}>
+        {InfoIcon64x64}
+        <TextBison color="failure" style={{ textAlign: 'center', width: '85%' }}>
           {message}
-        </Text>
+        </TextBison>
       </AutoColumn>
 
       <Flex justifyContent="center" pt="24px">
-        <Button onClick={onDismiss}>{t('Dismiss')}</Button>
+        <Button
+          onClick={onDismiss}
+          style={{
+            background:'#FFCA28',
+            color: '#1E1F20'
+          }}
+        >
+          {t('Dismiss')}
+        </Button>
       </Flex>
     </Wrapper>
   )

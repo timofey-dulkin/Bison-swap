@@ -34,7 +34,7 @@ const FixedHeightRow = styled(RowBetween)`
 `
 
 const TextCurrent = styled(Text)`
-  color: #DAA10E;
+  color: #FFFFFF;
 `
 
 interface PositionCardProps extends CardProps {

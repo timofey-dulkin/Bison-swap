@@ -102,14 +102,35 @@ export default function Pool() {
               <Text style={{marginBottom: '14px'}}>
                 {t("Don't see a pool you joined?")}
               </Text>
-              <Button id="import-pool-link" variant="secondary" scale="sm" as={Link} to="/find">
+              <Button
+                id="import-pool-link"
+                variant="secondary"
+                scale="sm"
+                as={Link}
+                to="/find"
+                style={{
+                  background: 'rgba(218, 161, 14, 0.14)',
+                  border: '1px solid #DAA10E',
+                  color: '#FFFFFF',
+                }}
+              >
                 {t('Find other LP tokens')}
               </Button>
             </Flex>
           )}
         </Body>
         <CardFooter style={{ textAlign: 'center' }}>
-          <Button id="join-pool-button" as={Link} to="/add" width="100%" startIcon={<AddIcon color="white" />}>
+          <Button
+            id="join-pool-button"
+            as={Link}
+            to="/add"
+            width="100%"
+            startIcon={<AddIcon color="black" />}
+            style={{
+              background: '#FFCA28',
+              color: '#000000',
+            }}
+          >
             {t('Add Liquidity')}
           </Button>
         </CardFooter>

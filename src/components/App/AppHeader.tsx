@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex, IconButton, ArrowBackIcon, NotificationDot } from '@pancakeswap/uikit'
+import { Flex, IconButton, NotificationDot } from '@pancakeswap/uikit'
 import { Link } from 'react-router-dom'
 import { useExpertModeManager } from 'state/user/hooks'
 import GlobalSettings from 'components/Menu/GlobalSettings'
 import Transactions from './Transactions'
 import QuestionHelper from '../QuestionHelper'
+
+import { ArrowBackIcon } from '../../constants/icon.constants'
 
 interface Props {
   title: string
@@ -43,7 +45,7 @@ const AppHeader: React.FC<Props> = ({ title, subtitle, helper, backTo, noConfig 
       <Flex alignItems="center" mr={noConfig ? 0 : '16px'}>
         {backTo && (
           <IconButton as={Link} to={backTo}>
-            <ArrowBackIcon width="32px" />
+            {ArrowBackIcon}
           </IconButton>
         )}
         <Flex flexDirection="column">

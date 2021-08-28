@@ -23,6 +23,10 @@ const IconWrapper = styled.div<{ pending: boolean; success?: boolean }>`
     pending ? theme.colors.primary : success ? theme.colors.success : theme.colors.failure};
 `
 
+const LinkExternalBison = styled(LinkExternal)`
+  color: #FFFFFF;
+`
+
 export default function Transaction({ tx }: { tx: TransactionDetails }) {
   const { chainId } = useActiveWeb3React()
 
@@ -34,7 +38,7 @@ export default function Transaction({ tx }: { tx: TransactionDetails }) {
 
   return (
     <TransactionState pending={pending} success={success}>
-      <LinkExternal href={getBscScanLink(tx.hash, 'transaction', chainId)}>{summary ?? tx.hash}</LinkExternal>
+      <LinkExternalBison href={getBscScanLink(tx.hash, 'transaction', chainId)}>{summary ?? tx.hash}</LinkExternalBison>
       <IconWrapper pending={pending} success={success}>
         {pending ? <CircleLoader /> : success ? <CheckmarkIcon color="success" /> : <CloseIcon color="failure" />}
       </IconWrapper>

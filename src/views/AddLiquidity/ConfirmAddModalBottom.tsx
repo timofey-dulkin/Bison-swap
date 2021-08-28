@@ -1,10 +1,16 @@
 import { Currency, CurrencyAmount, Fraction, Percent } from '@pancakeswap/sdk'
 import React from 'react'
+import styled from 'styled-components'
 import { Button, Text } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { RowBetween, RowFixed } from '../../components/Layout/Row'
 import { CurrencyLogo } from '../../components/Logo'
 import { Field } from '../../state/mint/actions'
+
+
+const TextBison = styled(Text)`
+  color: #DAA10E;
+`
 
 function ConfirmAddModalBottom({
   noLiquidity,
@@ -25,39 +31,46 @@ function ConfirmAddModalBottom({
   return (
     <>
       <RowBetween>
-        <Text>{t('%asset% Deposited', { asset: currencies[Field.CURRENCY_A]?.symbol })}</Text>
+        <TextBison>{t('%asset% Deposited', { asset: currencies[Field.CURRENCY_A]?.symbol })}</TextBison>
         <RowFixed>
           <CurrencyLogo currency={currencies[Field.CURRENCY_A]} style={{ marginRight: '8px' }} />
-          <Text>{parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)}</Text>
+          <TextBison>{parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)}</TextBison>
         </RowFixed>
       </RowBetween>
       <RowBetween>
-        <Text>{t('%asset% Deposited', { asset: currencies[Field.CURRENCY_B]?.symbol })}</Text>
+        <TextBison>{t('%asset% Deposited', { asset: currencies[Field.CURRENCY_B]?.symbol })}</TextBison>
         <RowFixed>
           <CurrencyLogo currency={currencies[Field.CURRENCY_B]} style={{ marginRight: '8px' }} />
-          <Text>{parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)}</Text>
+          <TextBison>{parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)}</TextBison>
         </RowFixed>
       </RowBetween>
       <RowBetween>
-        <Text>{t('Rates')}</Text>
-        <Text>
+        <TextBison>{t('Rates')}</TextBison>
+        <TextBison>
           {`1 ${currencies[Field.CURRENCY_A]?.symbol} = ${price?.toSignificant(4)} ${
             currencies[Field.CURRENCY_B]?.symbol
           }`}
-        </Text>
+        </TextBison>
       </RowBetween>
       <RowBetween style={{ justifyContent: 'flex-end' }}>
-        <Text>
+        <TextBison>
           {`1 ${currencies[Field.CURRENCY_B]?.symbol} = ${price?.invert().toSignificant(4)} ${
             currencies[Field.CURRENCY_A]?.symbol
           }`}
-        </Text>
+        </TextBison>
       </RowBetween>
       <RowBetween>
-        <Text>{t('Share of Pool')}:</Text>
-        <Text>{noLiquidity ? '100' : poolTokenPercentage?.toSignificant(4)}%</Text>
+        <TextBison>{t('Share of Pool')}:</TextBison>
+        <TextBison>{noLiquidity ? '100' : poolTokenPercentage?.toSignificant(4)}%</TextBison>
       </RowBetween>
-      <Button onClick={onAdd} mt="20px">
+      <Button
+        onClick={onAdd}
+        mt="20px"
+        style={{
+          background: '#FFCA28',
+          color: '#1E1F20'
+        }}
+      >
         {noLiquidity ? t('Create Pool & Supply') : t('Confirm Supply')}
       </Button>
     </>

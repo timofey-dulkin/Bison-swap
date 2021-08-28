@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
+import styled from 'styled-components'
 import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@pancakeswap/sdk'
-import { Button, Text, Flex, AddIcon, CardBody, Message, useModal } from '@pancakeswap/uikit'
+import { Button, Text, Flex, CardBody, Message, useModal } from '@pancakeswap/uikit'
 import { RouteComponentProps } from 'react-router-dom'
 import { useIsTransactionUnsupported } from 'hooks/Trades'
 import { useTranslation } from 'contexts/Localization'
@@ -36,6 +37,12 @@ import ConfirmAddModalBottom from './ConfirmAddModalBottom'
 import { currencyId } from '../../utils/currencyId'
 import PoolPriceBar from './PoolPriceBar'
 import Page from '../Page'
+
+import { AddIcon } from '../../constants/icon.constants'
+
+const TextBison = styled(Text)`
+  color: #DAA10E;
+`
 
 export default function AddLiquidity({
   match: {
@@ -197,9 +204,9 @@ export default function AddLiquidity({
   const modalHeader = () => {
     return noLiquidity ? (
       <Flex alignItems="center">
-        <Text fontSize="48px" marginRight="10px">
+        <TextBison fontSize="48px" marginRight="10px">
           {`${currencies[Field.CURRENCY_A]?.symbol}/${currencies[Field.CURRENCY_B]?.symbol}`}
-        </Text>
+        </TextBison>
         <DoubleCurrencyLogo
           currency0={currencies[Field.CURRENCY_A]}
           currency1={currencies[Field.CURRENCY_B]}
@@ -209,9 +216,9 @@ export default function AddLiquidity({
     ) : (
       <AutoColumn>
         <Flex alignItems="center">
-          <Text fontSize="48px" marginRight="10px">
+          <TextBison fontSize="48px" marginRight="10px">
             {liquidityMinted?.toSignificant(6)}
-          </Text>
+          </TextBison>
           <DoubleCurrencyLogo
             currency0={currencies[Field.CURRENCY_A]}
             currency1={currencies[Field.CURRENCY_B]}
@@ -219,15 +226,15 @@ export default function AddLiquidity({
           />
         </Flex>
         <Row>
-          <Text fontSize="24px">
+          <TextBison fontSize="24px">
             {`${currencies[Field.CURRENCY_A]?.symbol}/${currencies[Field.CURRENCY_B]?.symbol} Pool Tokens`}
-          </Text>
+          </TextBison>
         </Row>
-        <Text small textAlign="left" my="24px">
+        <TextBison small textAlign="left" my="24px">
           {t('Output is estimated. If the price changes by more than %slippage%% your transaction will revert.', {
             slippage: allowedSlippage / 100,
           })}
-        </Text>
+        </TextBison>
       </AutoColumn>
     )
   }
@@ -321,11 +328,11 @@ export default function AddLiquidity({
               <ColumnCenter>
                 <Message variant="warning">
                   <div>
-                    <Text bold mb="8px">
+                    <TextBison bold mb="8px">
                       {t('You are the first liquidity provider.')}
-                    </Text>
-                    <Text mb="8px">{t('The ratio of tokens you add will set the price of this pool.')}</Text>
-                    <Text>{t('Once you are happy with the rate click supply to review.')}</Text>
+                    </TextBison>
+                    <TextBison mb="8px">{t('The ratio of tokens you add will set the price of this pool.')}</TextBison>
+                    <TextBison>{t('Once you are happy with the rate click supply to review.')}</TextBison>
                   </div>
                 </Message>
               </ColumnCenter>
@@ -343,7 +350,7 @@ export default function AddLiquidity({
               showCommonBases
             />
             <ColumnCenter>
-              <AddIcon width="16px" />
+              {AddIcon}
             </ColumnCenter>
             <CurrencyInputPanel
               value={formattedAmounts[Field.CURRENCY_B]}
@@ -361,9 +368,9 @@ export default function AddLiquidity({
               <>
                 <LightCard padding="0px" borderRadius="20px">
                   <RowBetween padding="1rem">
-                    <Text fontSize="14px">
+                    <TextBison fontSize="14px">
                       {noLiquidity ? t('Initial prices and pool share') : t('Prices and pool share')}
-                    </Text>
+                    </TextBison>
                   </RowBetween>{' '}
                   <LightCard padding="1rem" borderRadius="20px">
                     <PoolPriceBar
@@ -396,6 +403,10 @@ export default function AddLiquidity({
                           onClick={approveACallback}
                           disabled={approvalA === ApprovalState.PENDING}
                           width={approvalB !== ApprovalState.APPROVED ? '48%' : '100%'}
+                          style={{
+                            background: (approvalA === ApprovalState.PENDING) ? 'rgba(255, 202, 40, 0.4)' : '#FFCA28',
+                            color: '#1E1F20'
+                          }}
                         >
                           {approvalA === ApprovalState.PENDING ? (
                             <Dots>{t('Enabling %asset%', { asset: currencies[Field.CURRENCY_A]?.symbol })}</Dots>
@@ -409,6 +420,10 @@ export default function AddLiquidity({
                           onClick={approveBCallback}
                           disabled={approvalB === ApprovalState.PENDING}
                           width={approvalA !== ApprovalState.APPROVED ? '48%' : '100%'}
+                          style={{
+                            background: (approvalB === ApprovalState.PENDING) ? 'rgba(255, 202, 40, 0.4)' : '#FFCA28',
+                            color: '#1E1F20'
+                          }}
                         >
                           {approvalB === ApprovalState.PENDING ? (
                             <Dots>{t('Enabling %asset%', { asset: currencies[Field.CURRENCY_B]?.symbol })}</Dots>
@@ -433,6 +448,10 @@ export default function AddLiquidity({
                     }
                   }}
                   disabled={!isValid || approvalA !== ApprovalState.APPROVED || approvalB !== ApprovalState.APPROVED}
+                  style={{
+                    background: (!isValid || approvalA !== ApprovalState.APPROVED || approvalB !== ApprovalState.APPROVED) ? 'rgba(255, 202, 40, 0.4)' : '#FFCA28',
+                    color: '#1E1F20'
+                  }}
                 >
                   {error ?? t('Supply')}
                 </Button>

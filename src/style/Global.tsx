@@ -47,6 +47,14 @@ const GlobalStyle = createGlobalStyle`
     .bkkKbm {
       background: rgba(30, 31, 32, 0.95);
     }
+    .hYaPSN {
+      background: #1E1F20;
+      border-bottom: 1px solid #DAA10E;
+
+      h2 {
+        color: #DAA10E;
+      }
+    }
     .iRNNce {
       background: #1E1F20;
       border-bottom: 1px solid #DAA10E;
@@ -54,6 +62,15 @@ const GlobalStyle = createGlobalStyle`
       h2 {
         color: #DAA10E;
       }
+    }
+    .dZgAmB {
+      display: none;
+    }
+    .dPIQsB {
+      color: #DAA10E !important;
+    }
+    .fJYfpH {
+      border-bottom: none;
     }
   }
 `
