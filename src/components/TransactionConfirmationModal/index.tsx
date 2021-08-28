@@ -4,13 +4,11 @@ import styled from 'styled-components'
 import {
   Button,
   Text,
-  ErrorIcon,
   ArrowUpIcon,
   MetamaskIcon,
   Flex,
   Box,
   Link,
-  Spinner,
   Modal,
   InjectedModalProps,
 } from '@pancakeswap/uikit'
