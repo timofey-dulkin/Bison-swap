@@ -13,7 +13,7 @@ import Button from '../../../components/Button';
 import LogOutModal from '../../modal/LogOutModal';
 
 import { LogIn, Wallet, ArrowDownIcon } from '../../../constants/icon.constants';
-import { PATH_INDEX, LINK_PATH_HOME, LINK_PATH_ABOUT, LINK_PATH_FUNDS } from '../../../constants/routes.constants';
+import { PATH_INDEX, LINK_PATH_HOME, LINK_PATH_ABOUT, LINK_PATH_FUNDS, LINK_PATH_FARMS } from '../../../constants/routes.constants';
 
 import useStyles  from './styles.module';
 import useActiveWeb3React from "../../../hooks/useActiveWeb3React";
@@ -55,6 +55,9 @@ const Header = () => {
                 <MuButton className={classes.link} href={LINK_PATH_HOME}>Home</MuButton>
                 <MuButton className={classes.link} href={LINK_PATH_ABOUT}>About</MuButton>
                 <MuButton className={classes.link} href={LINK_PATH_FUNDS} target='_blank'>Funds</MuButton>
+                <MuButton className={classes.link} href={LINK_PATH_FARMS}>
+                  Farms
+                </MuButton>
               </Grid>
             )
           }

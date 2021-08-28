@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Currency, ETHER, JSBI, TokenAmount } from '@pancakeswap/sdk'
-import { Button, ChevronDownIcon, Text, AddIcon, useModal } from '@pancakeswap/uikit'
+import { Button, Text, useModal } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 import { LightCard } from '../../components/Card'
@@ -19,10 +19,16 @@ import Dots from '../../components/Loader/Dots'
 import { AppHeader, AppBody } from '../../components/App'
 import Page from '../Page'
 
+import { AddIcon, ChevronDownIcon } from '../../constants/icon.constants'
+
 enum Fields {
   TOKEN0 = 0,
   TOKEN1 = 1,
 }
+
+const TextBison = styled(Text)`
+  color: #DAA10E;
+`
 
 const StyledButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.input};
@@ -72,9 +78,9 @@ export default function PoolFinder() {
 
   const prerequisiteMessage = (
     <LightCard padding="45px 10px">
-      <Text textAlign="center">
+      <TextBison textAlign="center">
         {!account ? t('Connect to a wallet to find pools') : t('Select a token to find your liquidity.')}
-      </Text>
+      </TextBison>
     </LightCard>
   )
 
@@ -95,40 +101,46 @@ export default function PoolFinder() {
         <AppHeader title={t('Import Pool')} subtitle={t('Import an existing pool')} backTo="/pool" />
         <AutoColumn style={{ padding: '1rem' }} gap="md">
           <StyledButton
-            endIcon={<ChevronDownIcon />}
+            endIcon={ChevronDownIcon}
             onClick={() => {
               onPresentCurrencyModal()
               setActiveField(Fields.TOKEN0)
+            }}
+            style={{
+              background: 'rgba(255, 202, 40, 0.25)',
             }}
           >
             {currency0 ? (
               <Row>
                 <CurrencyLogo currency={currency0} />
-                <Text ml="8px">{currency0.symbol}</Text>
+                <TextBison ml="8px">{currency0.symbol}</TextBison>
               </Row>
             ) : (
-              <Text ml="8px">{t('Select a Token')}</Text>
+              <TextBison ml="8px">{t('Select a Token')}</TextBison>
             )}
           </StyledButton>
 
           <ColumnCenter>
-            <AddIcon />
+            {AddIcon}
           </ColumnCenter>
 
           <StyledButton
-            endIcon={<ChevronDownIcon />}
+            endIcon={ChevronDownIcon}
             onClick={() => {
               onPresentCurrencyModal()
               setActiveField(Fields.TOKEN1)
+            }}
+            style={{
+              background: 'rgba(255, 202, 40, 0.25)',
             }}
           >
             {currency1 ? (
               <Row>
                 <CurrencyLogo currency={currency1} />
-                <Text ml="8px">{currency1.symbol}</Text>
+                <TextBison ml="8px">{currency1.symbol}</TextBison>
               </Row>
             ) : (
-              <Text as={Row}>{t('Select a Token')}</Text>
+              <TextBison as={Row}>{t('Select a Token')}</TextBison>
             )}
           </StyledButton>
 
@@ -136,9 +148,9 @@ export default function PoolFinder() {
             <ColumnCenter
               style={{ justifyItems: 'center', backgroundColor: '', padding: '12px 0px', borderRadius: '12px' }}
             >
-              <Text textAlign="center">{t('Pool Found!')}</Text>
+              <TextBison textAlign="center">{t('Pool Found!')}</TextBison>
               <StyledInternalLink to="/pool">
-                <Text textAlign="center">{t('Manage this pool.')}</Text>
+                <TextBison textAlign="center">{t('Manage this pool.')}</TextBison>
               </StyledInternalLink>
             </ColumnCenter>
           )}
@@ -150,9 +162,9 @@ export default function PoolFinder() {
               ) : (
                 <LightCard padding="45px 10px">
                   <AutoColumn gap="sm" justify="center">
-                    <Text textAlign="center">{t('You don’t have liquidity in this pool yet.')}</Text>
+                    <TextBison textAlign="center">{t('You don’t have liquidity in this pool yet.')}</TextBison>
                     <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
-                      <Text textAlign="center">{t('Add Liquidity')}</Text>
+                      <TextBison textAlign="center">{t('Add Liquidity')}</TextBison>
                     </StyledInternalLink>
                   </AutoColumn>
                 </LightCard>
@@ -160,7 +172,7 @@ export default function PoolFinder() {
             ) : validPairNoLiquidity ? (
               <LightCard padding="45px 10px">
                 <AutoColumn gap="sm" justify="center">
-                  <Text textAlign="center">{t('No pool found.')}</Text>
+                  <TextBison textAlign="center">{t('No pool found.')}</TextBison>
                   <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
                     {t('Create pool.')}
                   </StyledInternalLink>
@@ -169,18 +181,18 @@ export default function PoolFinder() {
             ) : pairState === PairState.INVALID ? (
               <LightCard padding="45px 10px">
                 <AutoColumn gap="sm" justify="center">
-                  <Text textAlign="center" fontWeight={500}>
+                  <TextBison textAlign="center" fontWeight={500}>
                     {t('Invalid pair.')}
-                  </Text>
+                  </TextBison>
                 </AutoColumn>
               </LightCard>
             ) : pairState === PairState.LOADING ? (
               <LightCard padding="45px 10px">
                 <AutoColumn gap="sm" justify="center">
-                  <Text textAlign="center">
+                  <TextBison textAlign="center">
                     {t('Loading')}
                     <Dots />
-                  </Text>
+                  </TextBison>
                 </AutoColumn>
               </LightCard>
             ) : null

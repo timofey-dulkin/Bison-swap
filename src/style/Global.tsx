@@ -63,9 +63,6 @@ const GlobalStyle = createGlobalStyle`
         color: #DAA10E;
       }
     }
-    .dZgAmB {
-      display: none;
-    }
     .dPIQsB {
       color: #DAA10E !important;
     }
