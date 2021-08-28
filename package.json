@@ -5,7 +5,9 @@
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
-    "build": "CI=false react-scripts build",
+    "build": "react-scripts build",
+    "build-mainnet": "react-scripts build && rm -rf ../farms-mainnet/* && mv ./build/* ../farms-mainnet/",
+    "build-testnet": "react-scripts build && rm -rf ../farms-testnet/* && mv ./build/* ../farms-testnet/",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
