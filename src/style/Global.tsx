@@ -56,6 +56,9 @@ const GlobalStyle = createGlobalStyle`
         color: #DAA10E;
       }
     }
+    .hXVokk {
+      display: none;
+    }
 
     /* .jxkOjj {
       background: rgba(30, 31, 32, 0.95);
