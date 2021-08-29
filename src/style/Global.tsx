@@ -41,6 +41,13 @@ const GlobalStyle = createGlobalStyle`
     [role="presentation"] {
       background: rgba(30, 31, 32, 0.95);
     }
+    [role="presentation"] + div {
+      background: rgba(30, 31, 32, 0.95);
+      border: 1px solid #DAA10E;
+      [color="text"] {
+        color: #DAA10E;
+      }
+    }
     .sc-gIvpjk {
       background: #1E1F20;
       border-bottom: 1px solid #DAA10E;
