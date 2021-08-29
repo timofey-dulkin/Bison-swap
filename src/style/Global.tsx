@@ -38,8 +38,19 @@ const GlobalStyle = createGlobalStyle`
       height: auto;
       max-width: 100%;
     }
+    [role="presentation"] {
+      background: rgba(30, 31, 32, 0.95);
+    }
+    .sc-gIvpjk {
+      background: #1E1F20;
+      border-bottom: 1px solid #DAA10E;
 
-    .jxkOjj {
+      h2 {
+        color: #DAA10E;
+      }
+    }
+
+    /* .jxkOjj {
       background: rgba(30, 31, 32, 0.95);
       border: 1px solid #DAA10E;
     }
@@ -68,7 +79,7 @@ const GlobalStyle = createGlobalStyle`
     }
     .fJYfpH {
       border-bottom: none;
-    }
+    } */
   }
 `
 

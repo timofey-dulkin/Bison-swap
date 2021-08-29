@@ -108,7 +108,12 @@ const Header = () => {
             )
           }
         </Grid>
-        {isLogOutModal && <LogOutModal onClose={() => setLogOutModal(false)} title={walletAddress} account={account} />}
+        {isLogOutModal && <LogOutModal
+          onClose={() => setLogOutModal(false)}
+          title={walletAddress}
+          account={account}
+          logout={logout}
+        />}
       </Toolbar>
     </AppBar>
   );

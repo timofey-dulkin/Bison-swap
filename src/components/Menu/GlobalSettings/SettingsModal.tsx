@@ -20,6 +20,9 @@ const PancakeToggleWrapper = styled.div`
 const ModalBison = styled(Modal)`
   background: #1E1F20;
   border: 1px solid #DAA10E;
+  &:first-child {
+    background: #1E1F20 !important;
+  }
 `
 const TextBison = styled(Text)`
   color: #DAA10E;

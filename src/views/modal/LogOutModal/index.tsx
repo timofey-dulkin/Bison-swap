@@ -8,7 +8,7 @@ import { BSC_SCAN_URL } from '../../../constants/global.constants';
 
 import useStyles from './styles.module';
 
-const LogOutModal = ({ title, onClose, account }) => {
+const LogOutModal = ({ title, onClose, account, logout }) => {
   const classes = useStyles();
 
   return (
@@ -19,7 +19,7 @@ const LogOutModal = ({ title, onClose, account }) => {
     >
       <div className={classes.wrap}>
         <Button className={classes.button} href={`${BSC_SCAN_URL}${account}`} target="_blank">View on BSCScan</Button>
-      {/*  <Button className={classes.button} onClick={() => connect(0)}>Log Out</Button> */}
+        <Button className={classes.button} onClick={() => {logout(); onClose();}}>Log Out</Button>
       </div>
     </ModalWrap>
   );
