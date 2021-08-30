@@ -56,14 +56,29 @@ const GlobalStyle = createGlobalStyle`
         color: #DAA10E;
       }
     }
+    [href="https://docs.pancakeswap.finance/get-started/connection-guide"] {
+      display: none;
+    }
     
     /* develop */
     .WFckb{
       fill: #DAA10E;
     }
+    .fJYfpH {
+      border-bottom: none;
+    }
+    .hZurtV {
+      display: none;
+    }
     /* prod */
     .ACFFk{
       fill: #DAA10E;
+    }
+    .ezMVWK {
+      border-bottom: none;
+    }
+    .lgkSXZ {
+      display: none;
     }
 
     /* .jxkOjj {

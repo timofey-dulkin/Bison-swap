@@ -25,6 +25,10 @@ const InputBison = styled(Input)`
   border: 1px solid #DAA10E;
 `
 
+const TextBison = styled(Text)`
+  color: #DAA10E;
+`
+
 interface CurrencySearchProps {
   selectedCurrency?: Currency | null
   onCurrencySelect: (currency: Currency) => void
@@ -93,9 +97,9 @@ function CurrencySearch({
   // manage focus on modal show
   const inputRef = useRef<HTMLInputElement>()
 
-  useEffect(() => {
+  /* useEffect(() => {
     inputRef.current.focus()
-  }, [])
+  }, []) */
 
   const handleInput = useCallback((event) => {
     const input = event.target.value
@@ -131,7 +135,7 @@ function CurrencySearch({
     <>
       <div>
         <AutoColumn gap="16px">
-          <Row>
+          {/* <Row>
             <InputBison
               id="token-search-input"
               placeholder={t('Search name or paste address')}
@@ -142,10 +146,10 @@ function CurrencySearch({
               onChange={handleInput}
               onKeyDown={handleEnter}
             />
-          </Row>
-          {showCommonBases && (
+          </Row> */}
+          {/* {showCommonBases && (
             <CommonBases chainId={chainId} onSelect={handleCurrencySelect} selectedCurrency={selectedCurrency} />
-          )}
+          )} */}
         </AutoColumn>
         {searchToken && !searchTokenIsAdded ? (
           <Column style={{ padding: '20px 0', height: '100%' }}>
@@ -170,9 +174,9 @@ function CurrencySearch({
           </Box>
         ) : (
           <Column style={{ padding: '20px', height: '100%' }}>
-            <Text color="textSubtle" textAlign="center" mb="20px">
+            <TextBison color="textSubtle" textAlign="center" mb="20px">
               {t('No results found.')}
-            </Text>
+            </TextBison>
           </Column>
         )}
       </div>
