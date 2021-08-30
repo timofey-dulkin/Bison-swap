@@ -56,8 +56,14 @@ const GlobalStyle = createGlobalStyle`
         color: #DAA10E;
       }
     }
-    .hXVokk {
-      display: none;
+    
+    /* develop */
+    .WFckb{
+      fill: #DAA10E;
+    }
+    /* prod */
+    .ACFFk{
+      fill: #DAA10E;
     }
 
     /* .jxkOjj {
