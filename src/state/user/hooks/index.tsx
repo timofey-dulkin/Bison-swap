@@ -74,7 +74,7 @@ export function useUserSingleHopOnly(): [boolean, (newSingleHopOnly: boolean) =>
 
   const setSingleHopOnly = useCallback(
     (newSingleHopOnly: boolean) => {
-      dispatch(updateUserSingleHopOnly({ userSingleHopOnly: newSingleHopOnly }))
+      dispatch(updateUserSingleHopOnly({ userSingleHopOnly: true }))
     },
     [dispatch],
   )

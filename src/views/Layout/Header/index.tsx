@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, SyntheticEvent } from 'react';
 import classNames from 'classnames';
 import { Grid, AppBar, Toolbar, Button as MuButton, } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -25,7 +25,7 @@ import useAuth from "../../../hooks/useAuth";
 const Header = () => {
   const classes = useStyles();
   const [isLogOutModal, setLogOutModal] = useState(false);
-  const [isDropDown, setDropDown] = useState<any>(null);
+  const [isDropDown, setDropDown] = useState(null);
   const matches = useMediaQuery('(max-width:960px)');
   const { account } = useActiveWeb3React()
   const { login, logout } = useAuth()
@@ -36,7 +36,6 @@ const Header = () => {
     account && `${account?.slice(0, 7) }...${account?.slice(account?.length - 4, account?.length)}`
   ), [account]);
 
-
   return (
     <AppBar position="relative" color="transparent" elevation={1}>
       <Toolbar className={classes.header}>
@@ -44,24 +43,22 @@ const Header = () => {
           container
           alignItems="center"
         >
-          <Grid lg={1} md={2} xs={6} item>
+          <Grid lg={1} md={1} xs={6} item>
             <Link to={PATH_INDEX}>
               <Image src="BiSharesLogo.png" width={114} height={48} alt='logo'/>
             </Link>
           </Grid>
           {
             !matches && (
-              <Grid lg={2} md={3} justifyContent="space-around" container item>
+              <Grid lg={3} md={4} justifyContent="space-around" container item>
                 <MuButton className={classes.link} href={LINK_PATH_HOME}>Home</MuButton>
                 <MuButton className={classes.link} href={LINK_PATH_ABOUT}>About</MuButton>
                 <MuButton className={classes.link} href={LINK_PATH_FUNDS} target='_blank'>Funds</MuButton>
-                <MuButton className={classes.link} href={LINK_PATH_FARMS}>
-                  Farms
-                </MuButton>
+                <MuButton className={classes.link} href={LINK_PATH_FARMS}>Farms</MuButton>
               </Grid>
             )
           }
-          <Grid lg={9} md={7} xs={4} justifyContent="flex-end" container item>
+          <Grid lg={8} md={7} xs={4} justifyContent="flex-end" container item>
             {
               account
                 ? (
@@ -89,6 +86,7 @@ const Header = () => {
                   className={classes.mobileButton}
                   aria-controls="simple-menu"
                   aria-haspopup="true"
+                  onClick={event => setDropDown(event.target)}
                   type='button'
                 >
                   {ArrowDownIcon}
@@ -103,6 +101,7 @@ const Header = () => {
                   <a href={LINK_PATH_HOME} className={classes.linMenu}><MenuItem>Home</MenuItem></a>
                   <a href={LINK_PATH_ABOUT} className={classes.linMenu}><MenuItem>About</MenuItem></a>
                   <a href={PATH_INDEX} className={classes.linMenu}><MenuItem>Funds</MenuItem></a>
+                  <a href={LINK_PATH_FARMS} className={classes.linMenu}><MenuItem>Farms</MenuItem></a>
                 </Menu>
               </Grid>
             )

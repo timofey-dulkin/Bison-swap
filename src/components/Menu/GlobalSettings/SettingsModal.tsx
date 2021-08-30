@@ -84,7 +84,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
           </TextBison>
           <TransactionSettings />
         </Flex>
-        <Flex justifyContent="space-between" alignItems="center" mb="24px">
+        {/* <Flex justifyContent="space-between" alignItems="center" mb="24px">
           <Flex alignItems="center">
             <TextBison>{t('Expert Mode')}</TextBison>
             <QuestionHelper
@@ -125,7 +125,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
               scale="md"
             />
           </PancakeToggleWrapper>
-        </Flex>
+        </Flex> */}
       </Flex>
     </ModalBison>
   )
