@@ -37,6 +37,10 @@ const TextCurrent = styled(Text)`
   color: #FFFFFF;
 `
 
+const CardBison = styled(Card)`
+  background: #1E1F20;
+`
+
 interface PositionCardProps extends CardProps {
   pair: Pair
   showUnwrapped?: boolean
@@ -173,8 +177,8 @@ export default function FullPositionCard({ pair, ...props }: PositionCardProps) 
       : [undefined, undefined]
 
   return (
-    <Card style={{ borderRadius: '12px' }} {...props}>
-      <Flex justifyContent="space-between" role="button" onClick={() => setShowMore(!showMore)} p="16px">
+    <CardBison style={{ borderRadius: '12px' }} {...props}>
+      <Flex justifyContent="space-between" onClick={() => setShowMore(!showMore)} p="16px" style={{ background: '#ECDEB5'}}>
         <Flex flexDirection="column">
           <Flex alignItems="center" mb="4px">
             <DoubleCurrencyLogo currency0={currency0} currency1={currency1} size={20} />
@@ -190,7 +194,7 @@ export default function FullPositionCard({ pair, ...props }: PositionCardProps) 
       </Flex>
 
       {showMore && (
-        <AutoColumn gap="8px" style={{ padding: '16px' }}>
+        <AutoColumn gap="8px" style={{ padding: '16px', background: '#ECDEB5' }}>
           <FixedHeightRow>
             <RowFixed>
               <CurrencyLogo size="20px" currency={currency0} />
@@ -256,6 +260,6 @@ export default function FullPositionCard({ pair, ...props }: PositionCardProps) 
           )}
         </AutoColumn>
       )}
-    </Card>
+    </CardBison>
   )
 }

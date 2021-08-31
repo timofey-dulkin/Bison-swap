@@ -37,6 +37,10 @@ const TextBison = styled(Text)`
   color: #DAA10E;
 `
 
+const LinkBison = styled(Link)`
+  color: #ffffff;
+`
+
 function ConfirmationPendingContent({ pendingText }: { pendingText: string }) {
   const { t } = useTranslation()
   return (
@@ -82,9 +86,9 @@ function TransactionSubmittedContent({
         <AutoColumn gap="12px" justify="center">
           <TextBison fontSize="20px">{t('Transaction Submitted')}</TextBison>
           {chainId && hash && (
-            <Link external small href={getBscScanLink(hash, 'transaction', chainId)}>
+            <LinkBison external small href={getBscScanLink(hash, 'transaction', chainId)}>
               {t('View on BscScan')}
-            </Link>
+            </LinkBison>
           )}
           {currencyToAdd && library?.provider?.isMetaMask && (
             <Button
@@ -92,6 +96,10 @@ function TransactionSubmittedContent({
               mt="12px"
               width="fit-content"
               onClick={() => registerToken(token.address, token.symbol, token.decimals)}
+              style={{
+                background: 'rgba(218, 161, 14, 0.25)',
+                color: '#ffffff'
+              }}
             >
               <RowFixed>
                 {t('Add %asset% to Metamask', { asset: currencyToAdd.symbol })}
@@ -99,7 +107,13 @@ function TransactionSubmittedContent({
               </RowFixed>
             </Button>
           )}
-          <Button onClick={onDismiss} mt="20px">
+          <Button
+            onClick={onDismiss} mt="20px"
+            style={{
+              background: '#FFCA28',
+              color: '#1E1F20'
+            }}
+          >
             {t('Close')}
           </Button>
         </AutoColumn>

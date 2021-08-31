@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { Pair } from '@pancakeswap/sdk'
-import { Flex, CardBody, Button, AddIcon } from '@pancakeswap/uikit'
+import { CardBody, Button, AddIcon } from '@pancakeswap/uikit'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'contexts/Localization'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
@@ -12,6 +12,8 @@ import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks
 import Dots from '../../components/Loader/Dots'
 import { AppHeader, AppBody } from '../../components/App'
 import Page from '../Page'
+import { getFactoryContract } from '../../utils'
+import { useTokenPairsWithLiquidityTokens } from '../../hooks/useFactory'
 
 const Body = styled(CardBody)`
   background-color: #1E1F20;
@@ -32,10 +34,14 @@ export default function Pool() {
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
-  const tokenPairsWithLiquidityTokens = useMemo(
+  /* const tokenPairsWithLiquidityTokens = useMemo(
     () => trackedTokenPairs.map((tokens) => ({ liquidityToken: toV2LiquidityToken(tokens), tokens })),
     [trackedTokenPairs],
-  )
+  ) */
+
+  const tokenPairsWithLiquidityTokens = useTokenPairsWithLiquidityTokens(trackedTokenPairs);
+
+
   const liquidityTokens = useMemo(
     () => tokenPairsWithLiquidityTokens.map((tpwlt) => tpwlt.liquidityToken),
     [tokenPairsWithLiquidityTokens],
@@ -55,10 +61,12 @@ export default function Pool() {
   )
 
   const v2Pairs = usePairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
+
   const v2IsLoading =
     fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some((V2Pair) => !V2Pair)
 
   const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
+
 
   const renderBody = () => {
     if (!account) {
@@ -97,27 +105,6 @@ export default function Pool() {
         <AppHeader title={t('Your Liquidity')} subtitle={t('Remove liquidity to receive tokens back')} />
         <Body>
           {renderBody()}
-          {account && !v2IsLoading && (
-            <Flex flexDirection="column" alignItems="center" mt="24px">
-              <Text style={{marginBottom: '14px'}}>
-                {t("Don't see a pool you joined?")}
-              </Text>
-              <Button
-                id="import-pool-link"
-                variant="secondary"
-                scale="sm"
-                as={Link}
-                to="/find"
-                style={{
-                  background: 'rgba(218, 161, 14, 0.14)',
-                  border: '1px solid #DAA10E',
-                  color: '#FFFFFF',
-                }}
-              >
-                {t('Find other LP tokens')}
-              </Button>
-            </Flex>
-          )}
         </Body>
         <CardFooter style={{ textAlign: 'center' }}>
           <Button
