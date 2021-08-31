@@ -1,4 +1,4 @@
-import React, { useState, useMemo, SyntheticEvent } from 'react';
+import React, { useState, useMemo } from 'react';
 import classNames from 'classnames';
 import { Grid, AppBar, Toolbar, Button as MuButton, } from '@material-ui/core';
 import { Link } from 'react-router-dom';
