@@ -8,11 +8,10 @@ import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import FullPositionCard from '../../components/PositionCard'
 import { useTokenBalancesWithLoadingIndicator } from '../../state/wallet/hooks'
 import { usePairs } from '../../hooks/usePairs'
-import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks'
+import { useTrackedTokenPairs } from '../../state/user/hooks'
 import Dots from '../../components/Loader/Dots'
 import { AppHeader, AppBody } from '../../components/App'
 import Page from '../Page'
-import { getFactoryContract } from '../../utils'
 import { useTokenPairsWithLiquidityTokens } from '../../hooks/useFactory'
 
 const Body = styled(CardBody)`
@@ -61,12 +60,12 @@ export default function Pool() {
   )
 
   const v2Pairs = usePairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
+  console.log(v2Pairs)
 
   const v2IsLoading =
     fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some((V2Pair) => !V2Pair)
 
   const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
-
 
   const renderBody = () => {
     if (!account) {
@@ -88,6 +87,7 @@ export default function Pool() {
         <FullPositionCard
           key={v2Pair.liquidityToken.address}
           pair={v2Pair}
+          liquidityToken={v2Pairs[0][2]}
           mb={index < allV2PairsWithLiquidity.length - 1 ? '16px' : 0}
         />
       ))

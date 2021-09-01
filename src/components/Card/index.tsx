@@ -23,8 +23,8 @@ export const LightCard = styled(Card)`
 `
 
 export const LightGreyCard = styled(Card)`
-  border: 1px solid ${({ theme }) => theme.colors.cardBorder};
-  background-color: ${({ theme }) => theme.colors.background};
+  border: 1px solid #DAA10E;
+  background-color: transparent;
 `
 
 export const GreyCard = styled(Card)`

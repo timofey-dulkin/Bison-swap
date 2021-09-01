@@ -70,6 +70,10 @@ const GlobalStyle = createGlobalStyle`
     .hZurtV {
       display: none;
     }
+    .bGARoH {
+      background: transparent;
+      border: 1px solid #DAA10E;
+    }
     /* prod */
     .ACFFk{
       fill: #DAA10E;

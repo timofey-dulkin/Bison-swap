@@ -3,13 +3,10 @@ import { JSBI, Pair, Percent } from '@pancakeswap/sdk'
 import {
   Button,
   Text,
-  ChevronUpIcon,
-  ChevronDownIcon,
   Card,
   CardBody,
   Flex,
   CardProps,
-  AddIcon,
 } from '@pancakeswap/uikit'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -29,12 +26,18 @@ import { RowBetween, RowFixed } from '../Layout/Row'
 import { BIG_INT_ZERO } from '../../config/constants'
 import Dots from '../Loader/Dots'
 
+import { AddIcon, ChevronDownIcon, ChevronUpIcon } from '../../constants/icon.constants'
+
 const FixedHeightRow = styled(RowBetween)`
   height: 24px;
 `
 
 const TextCurrent = styled(Text)`
   color: #FFFFFF;
+`
+
+const TextBison = styled(Text)`
+  color: #DAA10E;
 `
 
 const CardBison = styled(Card)`
@@ -44,6 +47,7 @@ const CardBison = styled(Card)`
 interface PositionCardProps extends CardProps {
   pair: Pair
   showUnwrapped?: boolean
+  liquidityToken?: any
 }
 
 export function MinimalPositionCard({ pair, showUnwrapped = false }: PositionCardProps) {
@@ -148,7 +152,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false }: PositionCar
   )
 }
 
-export default function FullPositionCard({ pair, ...props }: PositionCardProps) {
+export default function FullPositionCard({ pair, liquidityToken, ...props }: PositionCardProps) {
   const { account } = useActiveWeb3React()
 
   const currency0 = unwrappedToken(pair.token0)
@@ -166,7 +170,7 @@ export default function FullPositionCard({ pair, ...props }: PositionCardProps) 
 
   const [token0Deposited, token1Deposited] =
     !!pair &&
-    !!totalPoolTokens &&
+    false &&
     !!userPoolBalance &&
     // this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
     JSBI.greaterThanOrEqual(totalPoolTokens.raw, userPoolBalance.raw)
@@ -178,62 +182,62 @@ export default function FullPositionCard({ pair, ...props }: PositionCardProps) 
 
   return (
     <CardBison style={{ borderRadius: '12px' }} {...props}>
-      <Flex justifyContent="space-between" onClick={() => setShowMore(!showMore)} p="16px" style={{ background: '#ECDEB5'}}>
+      <Flex justifyContent="space-between" onClick={() => setShowMore(!showMore)} p="16px">
         <Flex flexDirection="column">
           <Flex alignItems="center" mb="4px">
             <DoubleCurrencyLogo currency0={currency0} currency1={currency1} size={20} />
-            <Text bold ml="8px">
+            <TextBison bold ml="8px">
               {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}
-            </Text>
+            </TextBison>
           </Flex>
-          <Text fontSize="14px" color="textSubtle">
+          <TextBison fontSize="14px" color="textSubtle">
             {userPoolBalance?.toSignificant(4)}
-          </Text>
+          </TextBison>
         </Flex>
-        {showMore ? <ChevronUpIcon /> : <ChevronDownIcon />}
+        {showMore ? ChevronUpIcon : ChevronDownIcon}
       </Flex>
 
       {showMore && (
-        <AutoColumn gap="8px" style={{ padding: '16px', background: '#ECDEB5' }}>
+        <AutoColumn gap="8px" style={{ padding: '16px' }}>
           <FixedHeightRow>
             <RowFixed>
               <CurrencyLogo size="20px" currency={currency0} />
-              <Text color="textSubtle" ml="4px">
+              <TextBison color="textSubtle" ml="4px">
                 Pooled {currency0.symbol}
-              </Text>
+              </TextBison>
             </RowFixed>
             {token0Deposited ? (
               <RowFixed>
-                <Text ml="6px">{token0Deposited?.toSignificant(6)}</Text>
+                <TextBison ml="6px">{token0Deposited?.toSignificant(6)}</TextBison>
               </RowFixed>
             ) : (
-              '-'
+              <TextBison>-</TextBison>
             )}
           </FixedHeightRow>
 
           <FixedHeightRow>
             <RowFixed>
               <CurrencyLogo size="20px" currency={currency1} />
-              <Text color="textSubtle" ml="4px">
+              <TextBison color="textSubtle" ml="4px">
                 Pooled {currency1.symbol}
-              </Text>
+              </TextBison>
             </RowFixed>
             {token1Deposited ? (
               <RowFixed>
-                <Text ml="6px">{token1Deposited?.toSignificant(6)}</Text>
+                <TextBison ml="6px">{token1Deposited?.toSignificant(6)}</TextBison>
               </RowFixed>
             ) : (
-              '-'
+              <TextBison>-</TextBison>
             )}
           </FixedHeightRow>
 
           <FixedHeightRow>
-            <Text color="textSubtle">Share of pool</Text>
-            <Text>
+            <TextBison color="textSubtle">Share of pool</TextBison>
+            <TextBison>
               {poolTokenPercentage
                 ? `${poolTokenPercentage.toFixed(2) === '0.00' ? '<0.01' : poolTokenPercentage.toFixed(2)}%`
                 : '-'}
-            </Text>
+            </TextBison>
           </FixedHeightRow>
 
           {userPoolBalance && JSBI.greaterThan(userPoolBalance.raw, BIG_INT_ZERO) && (
@@ -244,6 +248,10 @@ export default function FullPositionCard({ pair, ...props }: PositionCardProps) 
                 variant="primary"
                 width="100%"
                 mb="8px"
+                style={{
+                  background: '#FFCA28',
+                  color: '#000000'
+                }}
               >
                 Remove
               </Button>
@@ -251,8 +259,11 @@ export default function FullPositionCard({ pair, ...props }: PositionCardProps) 
                 as={Link}
                 to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}
                 variant="text"
-                startIcon={<AddIcon color="primary" />}
+                startIcon={AddIcon}
                 width="100%"
+                style={{
+                  color: '#FFFFFF'
+                }}
               >
                 Add liquidity instead
               </Button>
